@@ -1,0 +1,77 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    padding: 0 50px;
+}
+
+.textContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.title {
+    font-size: 82px;
+    margin: 0;
+}
+
+.desc {
+    font-size: 20px;
+    color: var(--text);
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.button {
+    padding: 20px;
+    min-width: 120px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.button:first-child {
+    background-color: var(--btn);
+    color: var(--text);
+}
+
+.imgContainer {
+    flex: 1;
+    position: relative;
+    height: 500px; /* Adjust this value based on your needs */
+}
+
+.heroImg {
+    object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 20px;
+    }
+    
+    .buttons {
+        justify-content: center;
+    }
+    
+    .imgContainer {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 64px;
+    }
+    
+    .imgContainer {
+        height: 400px; /* Adjust for mobile */
+    }
+}
