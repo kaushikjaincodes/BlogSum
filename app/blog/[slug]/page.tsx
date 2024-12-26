@@ -6,10 +6,9 @@ import PostUser from '@/components/postUser/postUser';
 import { getPost } from '@/app/lib/data';
 
 type Props = {
-  params: {
-    slug: string;
-  };
-};
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
 // const getPost = async(slug: string) => {
 //   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
