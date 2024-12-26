@@ -20,7 +20,7 @@ type Props = {
 // }
 
 const SinglePostPage = async ({params}: Props) => {
-  const { slug } = await params;
+  const { slug } = params;
   const post = await getPost(slug);
 
   return (
