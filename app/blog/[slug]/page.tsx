@@ -5,20 +5,15 @@ import { Suspense } from 'react';
 import PostUser from '@/components/postUser/postUser';
 import { getPost } from '@/app/lib/data';
 
-type Props = {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+interface PageParams {
+  slug: string;
 }
 
-// const getPost = async(slug: string) => {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`)
-//   if(!res.ok) {
-//     throw new Error("Something went wrong")
-//   }
-//   return res.json()
-// }
-
-const SinglePostPage = async ({params}: Props) => {
+export default async function SinglePostPage({
+  params,
+}: {
+  params: PageParams;
+}) {
   const { slug } = params;
   const post = await getPost(slug);
 
@@ -46,5 +41,3 @@ const SinglePostPage = async ({params}: Props) => {
     </div>
   )
 }
-
-export default SinglePostPage
