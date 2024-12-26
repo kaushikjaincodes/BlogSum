@@ -12,7 +12,7 @@ interface PageProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
 
-const SinglePostPage = async ({ params, searchParams }: PageProps) => {
+const SinglePostPage = async ({ params }: Pick<PageProps, 'params'>) => {
   const { slug } = params;
   const post = await getPost(slug);
 
