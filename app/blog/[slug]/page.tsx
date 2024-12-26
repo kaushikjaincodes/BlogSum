@@ -20,7 +20,7 @@ type Params = {
 // }
 
 const SinglePostPage = async ({params}: Params) => {
-  const { slug } = await params;
+  const { slug } = params;
   const post = await getPost(slug);
 
   return (
