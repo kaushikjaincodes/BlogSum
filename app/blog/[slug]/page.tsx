@@ -4,7 +4,15 @@ import styles from './singlePost.module.css';
 import PostUser from '@/components/postUser/postUser';
 import { getPost } from '@/app/lib/data';
 
-const SinglePostPage = async ({ params }: { params: { slug: string } }) => {
+// Add proper Next.js types
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams: Record<string, string | string[] | undefined>;
+}
+
+const SinglePostPage = async ({ params, searchParams }: PageProps) => {
   const { slug } = params;
   const post = await getPost(slug);
 
