@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import PostUser from '@/components/postUser/postUser';
 import { getPost } from '@/app/lib/data';
 
-type Params = {
+type Props = {
   params: {
     slug: string;
   };
@@ -19,7 +19,7 @@ type Params = {
 //   return res.json()
 // }
 
-const SinglePostPage = async ({params}: Params) => {
+const SinglePostPage = async ({params}: Props) => {
   const { slug } = await params;
   const post = await getPost(slug);
 
