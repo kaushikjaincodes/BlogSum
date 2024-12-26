@@ -4,15 +4,11 @@ import styles from './singlePost.module.css';
 import PostUser from '@/components/postUser/postUser';
 import { getPost } from '@/app/lib/data';
 
-// Add proper Next.js types
-interface PageProps {
-  params: {
-    slug: string;
-  };
-  searchParams: Record<string, string | string[] | undefined>;
-}
-
-const SinglePostPage = async ({ params }: Pick<PageProps, 'params'>) => {
+export default async function SinglePostPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const { slug } = params;
   const post = await getPost(slug);
 
@@ -51,6 +47,4 @@ const SinglePostPage = async ({ params }: Pick<PageProps, 'params'>) => {
       </div>
     </div>
   );
-};
-
-export default SinglePostPage;
+}
