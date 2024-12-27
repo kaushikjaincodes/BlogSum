@@ -1,17 +1,11 @@
 import { supabase } from "@/app/lib/supabaseClient";
-import { NextResponse } from "next/server";
-
-type Props = {
-  params: {
-    slug: string;
-  };
-};
+import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (
-  _request: Request,
-  context: Props
+  req: NextRequest,
+  { params }: { params: { slug: string } }
 ) => {
-  const { slug } = context.params;
+  const { slug } = params;
 
   try {
     const { data: post, error } = await supabase
@@ -33,10 +27,10 @@ export const GET = async (
 };
 
 export const DELETE = async (
-  _request: Request,
-  context: Props
+  req: NextRequest,
+  { params }: { params: { slug: string } }
 ) => {
-  const { slug } = context.params;
+  const { slug } = params;
 
   try {
     const { error } = await supabase.from("posts").delete().eq("slug", slug);
