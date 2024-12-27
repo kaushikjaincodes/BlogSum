@@ -1,10 +1,18 @@
 import { supabase } from "@/app/lib/supabaseClient";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const GET = async (
-  req: NextRequest,
-  { params }: { params: { slug: string } }
-) => {
+// Type definition for route parameters
+type RouteParams = {
+  params: {
+    slug: string;
+  };
+};
+
+// GET request to fetch a post by slug
+// export const GET = async (_request: Request, { params }: RouteParams) => {
+    //removing request [Error: 'request' is defined but never used.  @typescript-eslint/no-unused-vars]
+export const GET = async ({ params }: RouteParams) => {
+
   const { slug } = params;
 
   try {
@@ -26,10 +34,8 @@ export const GET = async (
   }
 };
 
-export const DELETE = async (
-  req: NextRequest,
-  { params }: { params: { slug: string } }
-) => {
+// DELETE request to delete a post by slug
+export const DELETE = async ({ params }: RouteParams) => {
   const { slug } = params;
 
   try {
