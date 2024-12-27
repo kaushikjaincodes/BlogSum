@@ -10,7 +10,7 @@ type BlogPost = {
     slug: string;
 }
 
-export const GET = async (request: Request) => {
+export const GET = async () => {
     try{
         const { data: posts, error } = await supabase
             .from('posts')
