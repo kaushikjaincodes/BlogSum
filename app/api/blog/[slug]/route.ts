@@ -7,7 +7,10 @@ type RouteParams = {
   };
 };
 
-export const GET = async ({ params }: RouteParams) => {
+export const GET = async (
+  request: Request,
+  { params }: RouteParams
+) => {
   const { slug } = params;
 
   try {
@@ -29,7 +32,10 @@ export const GET = async ({ params }: RouteParams) => {
   }
 };
 
-export const DELETE = async ({ params }: RouteParams) => {
+export const DELETE = async (
+  request: Request,
+  { params }: RouteParams
+) => {
   const { slug } = params;
 
   try {
