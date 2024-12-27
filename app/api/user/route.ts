@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/app/lib/supabaseClient";
 
-interface User {
-  id: string;
-  created_at: string;
-  updated_at: string;
-  username: string;
-  email: string;
-  isAdmin?: boolean;
-}
+// below interface is not used in this script
+// interface User {
+//   id: string;
+//   created_at: string;
+//   updated_at: string;
+//   username: string;
+//   email: string;
+//   isAdmin?: boolean;
+// }
 
 export const GET = async () => {
   try {

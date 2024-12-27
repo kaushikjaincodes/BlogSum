@@ -7,7 +7,9 @@
         const { title, desc, slug, userId, img} = Object.fromEntries(formData)
         
         try{
-            const { data, error } = await supabase
+            // removing data because of 
+            // const { data, error } = await supabase
+            const { error } = await supabase
                 .from('posts')
                 .insert([
                     {

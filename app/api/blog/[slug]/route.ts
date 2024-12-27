@@ -9,7 +9,10 @@ type RouteParams = {
 };
 
 // GET request to fetch a post by slug
-export const GET = async (request: Request, { params }: RouteParams) => {
+// export const GET = async (_request: Request, { params }: RouteParams) => {
+    //removing request [Error: 'request' is defined but never used.  @typescript-eslint/no-unused-vars]
+export const GET = async ({ params }: RouteParams) => {
+
   const { slug } = params;
 
   try {
@@ -32,7 +35,7 @@ export const GET = async (request: Request, { params }: RouteParams) => {
 };
 
 // DELETE request to delete a post by slug
-export const DELETE = async (request: Request, { params }: RouteParams) => {
+export const DELETE = async (_request: Request, { params }: RouteParams) => {
   const { slug } = params;
 
   try {

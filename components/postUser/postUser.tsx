@@ -2,7 +2,6 @@ import React from 'react'
 import styles from "./postUser.module.css"
 import { getUser } from '@/app/lib/data'
 import Image from "next/image"
-import { ImageProps } from 'next/image';
 
 type PostUserProps = {
   userID: string;
