@@ -1,15 +1,13 @@
 import { supabase } from "@/app/lib/supabaseClient";
 import { NextResponse } from "next/server";
 
-type RouteParams = {
-  params: {
-    slug: string;
-  };
-};
+interface Params {
+  slug: string;
+}
 
 export const GET = async (
   request: Request,
-  { params }: RouteParams
+  { params }: { params: Params }
 ) => {
   const { slug } = params;
 
@@ -34,7 +32,7 @@ export const GET = async (
 
 export const DELETE = async (
   request: Request,
-  { params }: RouteParams
+  { params }: { params: Params }
 ) => {
   const { slug } = params;
 
