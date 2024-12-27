@@ -49,7 +49,7 @@ export const generateMetadata = async ({ params }: Params) => {
 };
 
 export default async function SinglePostPage({ params }: Params) {
-  const { slug } = await params;
+  const { slug } = params;
   const post = await getPost(slug);
   // console.log('Post userId:', post.userId, typeof post.userId);
 
