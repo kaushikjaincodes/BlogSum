@@ -39,20 +39,16 @@ const getPost = async (slug: string): Promise<Post> => {
   }
 };
 
-export const generateMetadata = async ({params}: Params) => {
+export const generateMetadata = async ({ params }: Params) => {
   const { slug } = params;
-  const post = await getPost(slug)
-  return{
+  const post = await getPost(slug);
+  return {
     title: post.title,
     description: post.desc,
-  }
-}
+  };
+};
 
-export default async function SinglePostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function SinglePostPage({ params }: Params) {
   const { slug } = await params;
   const post = await getPost(slug);
   // console.log('Post userId:', post.userId, typeof post.userId);
@@ -61,8 +57,8 @@ export default async function SinglePostPage({
     <div className={styles.container}>
       <div className={styles.imgContainer}>
         <Image
-          src= {post.img}
-          alt={post.title || 'Blog post'} 
+          src={post.img}
+          alt={post.title || "Blog post"}
           width={250}
           height={550}
           className={styles.img}
@@ -85,7 +81,9 @@ export default async function SinglePostPage({
           )}
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
-            <span className={styles.detailValue}>{post.created_at.toString().slice(0, 10)}</span>
+            <span className={styles.detailValue}>
+              {post.created_at.toString().slice(0, 10)}
+            </span>
           </div>
         </div>
         <div className={styles.content}>{post.desc}</div>
