@@ -21,7 +21,7 @@ type Post = {
   updated_at: string;
 };
 
-export const getPost = async (slug: string): Promise<Post> => {
+const getPost = async (slug: string): Promise<Post> => {
   try {
     const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
       next: { revalidate: 3600 }, // Optional: Add revalidation logic for caching
