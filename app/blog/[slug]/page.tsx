@@ -33,13 +33,10 @@ const getPost = async (slug: string): Promise<Post> => {
   }
 };
 
-type PageProps = {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
+type Params = Promise<{ slug: string }>;
 
-export const generateMetadata = async ({ params }: PageProps) => {
-  const { slug } = params;
+export const generateMetadata = async ({ params }: { params: Params }) => {
+  const { slug } = await params; 
   const post = await getPost(slug);
   return {
     title: post.title,
@@ -47,8 +44,8 @@ export const generateMetadata = async ({ params }: PageProps) => {
   };
 };
 
-export default async function SinglePostPage({ params }: PageProps) {
-  const { slug } = params;
+export default async function SinglePostPage({ params }: {params: Params}) {
+  const { slug } = await params;
   const post = await getPost(slug);
 
   return (
