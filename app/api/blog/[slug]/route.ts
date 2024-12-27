@@ -35,7 +35,7 @@ export const GET = async ({ params }: RouteParams) => {
 };
 
 // DELETE request to delete a post by slug
-export const DELETE = async (_request: Request, { params }: RouteParams) => {
+export const DELETE = async ({ params }: RouteParams) => {
   const { slug } = params;
 
   try {
