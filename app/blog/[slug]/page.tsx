@@ -3,12 +3,6 @@ import Image from "next/image";
 import styles from "./singlePost.module.css";
 import PostUser from "@/components/postUser/postUser";
 
-type Params = {
-  params: {
-    slug: string;
-  };
-};
-
 // Type definition for Post
 type Post = {
   id: string;
@@ -24,7 +18,7 @@ type Post = {
 const getPost = async (slug: string): Promise<Post> => {
   try {
     const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
-      next: { revalidate: 3600 }, // Optional: Add revalidation logic for caching
+      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
@@ -39,7 +33,12 @@ const getPost = async (slug: string): Promise<Post> => {
   }
 };
 
-export const generateMetadata = async ({ params }: Params) => {
+type PageProps = {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+export const generateMetadata = async ({ params }: PageProps) => {
   const { slug } = params;
   const post = await getPost(slug);
   return {
@@ -48,10 +47,9 @@ export const generateMetadata = async ({ params }: Params) => {
   };
 };
 
-export default async function SinglePostPage({ params }: Params) {
+export default async function SinglePostPage({ params }: PageProps) {
   const { slug } = params;
   const post = await getPost(slug);
-  // console.log('Post userId:', post.userId, typeof post.userId);
 
   return (
     <div className={styles.container}>
@@ -67,13 +65,6 @@ export default async function SinglePostPage({ params }: Params) {
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.detail}>
-          {/* <Image
-            className={styles.avatar}
-            src="https://images.pexels.com/photos/28297970/pexels-photo-28297970/free-photo-of-a-totoro-statue-is-sitting-on-a-bench-outside-a-restaurant.jpeg"
-            alt=""
-            width={50}
-            height={50}
-          /> */}
           {post && (
             <Suspense fallback={<div>Loading...</div>}>
               <PostUser userID={post.userId} />
