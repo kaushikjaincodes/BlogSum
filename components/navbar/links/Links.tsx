@@ -21,6 +21,10 @@ const links = [
     {
         title: "Blog",
         path: "/blog"
+    },
+    {
+        title: "Create",
+        path: "/create"
     }
 ]
 
