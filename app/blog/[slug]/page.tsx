@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 import styles from "./singlePost.module.css";
 import PostUser from "@/components/postUser/postUser";
-// import { getPost } from "@/app/lib/data";
 
 type Params = {
   params: {
