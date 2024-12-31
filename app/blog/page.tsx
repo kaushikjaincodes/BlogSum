@@ -45,7 +45,7 @@ type Post = {
 
 const getPosts = async(): Promise<Post[]> => {
   try{
-    const res = await fetch("http://localhost:3000/api/blog", {
+    const res = await fetch("/api/blog", {
       next: { revalidate: 3600 }
     })
 
