@@ -17,8 +17,9 @@
 
 @media (max-width: 768px) {
     .links{
-        display: none;
-        /* gap: 50px; */
+        position: relative; /* Add this */
+        display: flex; /* Change from none to flex */
+        justify-content: flex-end; /* Add this */
     }
 
     .menuButton{
@@ -27,16 +28,28 @@
     }
     
     .mobileLinks {
-        position: absolute;
+        /* position: absolute;
         top: 100px;
         right: 0;
-        width: 50%;
+        width: 100%;
         height: calc(100vh - 100px);
         background-color: var(--bg);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 10px; */
+        position: absolute;
+        top: 60px; /* Adjust based on your header height */
+        right: 0;
+        width: 100%; /* Full width for better mobile experience */
+        background-color: var(--background); /* Match your theme */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
     }
 }
