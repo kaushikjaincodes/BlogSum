@@ -15,7 +15,7 @@ type Post = {
 
 const getPosts = async(): Promise<Post[]> => {
   try{
-    const res = await fetch("http://localhost:3000/api/blog", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL || ''}/api/blog`, {
       next: { revalidate: 3600 }
     })
 
