@@ -10,19 +10,24 @@
 }
 
 .imgContainer {
-  width: 90%;
+  width: 500px;
   height: 400px;
   position: relative;
 }
 
 .img {
   object-fit: cover;
+  /* object-position: center; */
+  /* width: 100%;
+  height: 100%; */
+  width: 2000px;
 }
 
 .date {
   font-size: 12px;
   transform: rotate(270deg);
   margin: auto;
+  white-space: nowrap;
 }
 
 .title {

@@ -10,7 +10,9 @@
 }
 
 .img {
-  object-fit: cover;
+  object-fit: contain;
+  width: 500px;
+  height: 500px; 
 }
 
 .textContainer {

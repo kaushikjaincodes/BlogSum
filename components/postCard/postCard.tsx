@@ -61,11 +61,11 @@ const PostCard = ({post}: PostCardProps) => {
             />
           )}
         </div>
-        <span className={styles.date}>25.12.2024</span>
+        <span className={styles.date}>{post.created_at.toString().slice(2, 10)}</span>
       </div>
       <div className={styles.bottom}>
         <h1 className={styles.title}>{post.title}</h1>
-        <p className={styles.desc}>{post.desc}</p>
+        <p className={styles.desc}>{post.desc.slice(0, 25)}...</p>
         <Link className={styles.link} href={`/blog/${post.slug}`}>READ MORE</Link>
       </div>
     </div>

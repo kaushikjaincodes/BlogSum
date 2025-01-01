@@ -44,21 +44,34 @@ type Post = {
 }
 
 const getPosts = async(): Promise<Post[]> => {
-  try{
-    const res = await fetch("/api/blog", {
-      next: { revalidate: 3600 }
-    })
+  try {
+    // Get the origin with a fallback to localhost if needed
+    let origin = typeof window !== 'undefined' ? window.location.origin : '';
+    if (!origin) {
+      origin = 'http://localhost:3000'; // Fallback for development
+    }
+    
+    // Create the full URL by combining origin and path
+    const url = `${origin}/api/blog`;
+    console.log('Fetching from:', url); // This should now show the   full URL
+    
+    const res = await fetch(url, {
+      next: { revalidate: 3600 },
+      cache: 'no-store'
+    });
 
-    if (!res.ok){
-      throw new Error(`HTTP error! status: ${res.status}`)
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('Error response:', errorText);
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     const posts = await res.json();
     return posts as Post[];
 
   } catch (error) {
-    console.error("Failed to fetch posts:", error);
-    throw new Error("Failed to fetch blog posts");
+    console.error("Detailed fetch error:", error);
+    throw error;
   }
 }
 
