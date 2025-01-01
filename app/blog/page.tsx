@@ -15,20 +15,24 @@ type Post = {
 
 const getPosts = async(): Promise<Post[]> => {
   try{
+    console.log('Fetching from:', `${process.env.NEXT_PUBLIC_URL || ''}/api/blog`);
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL || ''}/api/blog`, {
       next: { revalidate: 3600 }
     })
 
-    if (!res.ok){
-      throw new Error(`HTTP error! status: ${res.status}`)
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('Response not OK:', res.status, errorText);
+      throw new Error(`HTTP error! status: ${res.status}, body: ${errorText}`);
     }
 
     const posts = await res.json();
+    console.log('Received posts:', posts);
     return posts as Post[];
 
   } catch (error) {
     console.error("Failed to fetch posts:", error);
-    throw new Error("Failed to fetch blog posts");
+    throw error; // Throw the original error for better debugging
   }
 }
 
