@@ -11,18 +11,15 @@ type BlogPost = {
 }
 
 export const GET = async () => {
-    console.log('API route hit: /api/blog');
-    try {
+    try{
         const { data: posts, error } = await supabase
             .from('posts')
             .select('*')
         
-        console.log('Supabase response:', { posts, error });
-        
         if (error) {
             console.error('Supabase error: ', error)
             return NextResponse.json(
-                { error: 'Failed to fetch posts'},
+                { error: 'Falied to fetch posts'},
                 { status: 500}
             )
         }
