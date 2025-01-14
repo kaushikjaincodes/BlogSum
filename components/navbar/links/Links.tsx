@@ -4,7 +4,10 @@ import { useState } from "react";
 import NavLink from "./navLink/navLink";
 import styles from "./links.module.css"
 import Image from "next/image";
-
+import { signOut, useSession } from "next-auth/react";
+import {logout} from "@/actions/auth"
+import { sign } from "crypto";
+import { revalidatePath } from "next/cache";
 const links = [
     {
         title: "Homepage",
@@ -17,7 +20,7 @@ const links = [
     {
         title: "Contact",
         path: "/contact"
-    },
+    },       
     {
         title: "Blog",
         path: "/blog"
@@ -28,22 +31,32 @@ const links = [
     }
 ]
 
-const Links = () => {
+const  Links =  () => {
     const [open, setOpen] = useState(false)
-    //TEMPORARY
-    const session = true; // Simulates logged-in user
-    const isAdmin = true; // Simulates admin privileges
+    const { data: session } = useSession();
 
     return (
         <div className={styles.links}>
             {links.map(link => <NavLink item={link} key={link.title} />)}
-            {session ? (
+            {session?.user? (
                 <>
-                    {isAdmin && <NavLink item={{ title: "Admin", path: "/admin"}} />}
-                    <button className={styles.logout}>Logout</button>
+                    {session?.user?.image && (
+                        <Image 
+                        className="rounded-full"
+                        width={30}
+                        height={30}
+                        alt="User Image"
+                        src={session?.user?.image || ""}
+                    />
+                    )}
+                    <NavLink item={{ title: session.user?.name as string, path:"/"}} />
+                    <button className={styles.logout} onClick={async ()=>{
+                        await signOut({redirectTo: "/"} );
+                        revalidatePath("/");
+                    }}>logout</button>
                 </>
             ) : (
-                <NavLink item={{ title: "Login", path: "/login" }} />
+                <NavLink item={{ title: "Login", path: "/signin" }} />
             )}
 
             <Image className={styles.menuButton} src="/handshake.jpeg" alt="menu" width={30} height={30} onClick={() => setOpen((prev) => !prev)} />
