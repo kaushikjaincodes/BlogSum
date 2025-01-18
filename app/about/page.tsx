@@ -1,11 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from "./about.module.css"
+import Navbar from '@/components/navbar/Navbar'
+import Footer from '@/components/footer/Footer'
 
 export const metadata = { title: "About Page", description: "Aboout decription"}
 
 const AboutPage = () => {
   return (
+    <>
+    <Navbar/>
     <div className={styles.container}>
       <div className={styles.textContainer}>
         <h2 className={styles.subtitle}>About Agency</h2>
@@ -25,6 +29,8 @@ const AboutPage = () => {
         <Image src="/about.jpeg" alt='About Image' fill className={styles.img} />
       </div>
     </div>
+    <Footer/>
+    </>
   )
 }
 

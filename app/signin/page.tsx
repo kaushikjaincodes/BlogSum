@@ -1,17 +1,20 @@
 "use server"
 import React from 'react'
-import LoginGoogle from '@/components/LoginGoogle'
+import LoginGoogle from '@/components/Login/LoginGoogle'
+import LoginForm from '@/components/Login/LoginForm'
+import styles from './signin.module.css'
 
 const SignIn = () => {
     return (
-        <div className="w-full flex mt-20 justify center">
-            <section className='flex flex-col w-[400px]'>
+        <div className={styles.container}>
+            <section className={styles.section}>
                 <h1>
-                    Sign In
+                    Sign In With google
                 </h1>
+                {/* <LoginForm/> */}
+                <hr />
                 <LoginGoogle/>
             </section>
-            
         </div>
     )
 }

@@ -1,0 +1,36 @@
+/* Style for the Google button */
+.googlebtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between icon and text */
+  padding: 10px 20px;
+  background-color: #ffffff; /* White background */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Hover effect */
+.googlebtn:hover {
+  background-color: #f7f7f7; /* Slightly darker background on hover */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+/* Style for the Google icon */
+.icon {
+  color: #4285f4; /* Google Blue */
+  font-size: 18px; /* Adjust icon size */
+}
+
+/* Style for the text */
+.text {
+  color: #5f6368; /* Slightly gray text color */
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+

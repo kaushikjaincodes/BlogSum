@@ -1,59 +1,51 @@
 import React from "react";
 import PostCard from "@/components/postCard/postCard";
 import styles from "./blog.module.css";
-
+import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/Footer";
+import { auth } from "@/auth";
+import axios from "axios";
+import {prisma} from "@/app/lib/db";
 type Post = {
-  id: number;
-  created_at: string;
-  updated_at: string;
+  id: BigInt;
+  createdAt: string;
+  updatedAt: string;
   title: string;
   desc: string;
-  img: string;
+  image: string;
   userId: string;
   slug: string;
 }
 
 const getPosts = async(): Promise<Post[]> => {
-  try{
-    console.log('Fetching from:', `${process.env.NEXT_PUBLIC_URL || ''}/api/blog`);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL || ''}/api/blog`, {
-      next: { revalidate: 3600 }
-    })
+  const posts = await prisma.post.findMany({});
+  const formattedPosts = posts.map(post => ({
+    ...post,
+    createdAt: post.createdAt.toISOString(),
+    updatedAt: post.updatedAt.toISOString(),
+    image: post.image || "",
+  }));
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.error('Response not OK:', res.status, errorText);
-      throw new Error(`HTTP error! status: ${res.status}, body: ${errorText}`);
-    }
-
-    const posts = await res.json();
-    console.log('Received posts:', posts);
-    return posts as Post[];
-
-  } catch (error) {
-    console.error("Failed to fetch posts:", error);
-    throw error; // Throw the original error for better debugging
-  }
+  return formattedPosts;
 }
 
 const BlogPage = async () => {
+
   try {
     const posts = await getPosts();
     
-    if (!posts || posts.length === 0) {
-      return <div>No posts found</div>;
-    }
-
-    console.log('Posts data:', posts); // Add this to debug
-
     return (
+      <>
+      <Navbar/>
       <div className={styles.container}>
         {posts.map((post) => (
-          <div className={styles.post} key={post.id}>
+          <div className={styles.post} key={post.id.toString()}>
             <PostCard post={post} />
           </div>
         ))}
       </div>
+      <Footer/>
+      </>
     );
   } catch (error) {
     console.error('Error fetching posts:', error);

@@ -1,8 +1,12 @@
 import Image from "next/image";
 import styles from "./home.module.css";
+import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/Footer";
 
-export default function Home() {
+export default function  Home() {
   return (
+    <>
+    <Navbar />
     <div className={styles.container}>
       <div className={styles.textContainer}>
         <h1 className={styles.title}>Learn and Blog</h1>
@@ -18,5 +22,7 @@ export default function Home() {
         <Image src="/home.gif" alt="" fill className={styles.heroImg} />
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

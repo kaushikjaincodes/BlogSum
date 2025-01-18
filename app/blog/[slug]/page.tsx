@@ -1,32 +1,37 @@
 import React, { Suspense } from "react";
 import Image from "next/image";
 import styles from "./singlePost.module.css";
+import { prisma } from "@/app/lib/db";  
 import PostUser from "@/components/postUser/postUser";
-
-// Type definition for Post
 type Post = {
-  id: string;
+  id: bigint;
   title: string;
   desc: string;
-  img: string;
+  image: string;
   slug: string;
   userId: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 const getPost = async (slug: string): Promise<Post> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL || ''}/api/blog/${slug}`, {
-      next: { revalidate: 3600 },
-    });
+      const post = await prisma.post.findUnique({
+        where:{
+          slug:slug,
+        }
+      });
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch post. Status: ${res.status}`);
-    }
+      if (!post) {
+        throw new Error("Post not found");
+      }
 
-    const post: Post = await res.json();
-    return post;
+      return {
+        ...post,
+        createdAt: post.createdAt.toISOString(),
+        updatedAt: post.updatedAt.toISOString(),
+        image: post.image || ""
+      };
   } catch (err) {
     console.error("Error fetching post:", err);
     throw new Error("Something went wrong while fetching the post!");
@@ -41,18 +46,19 @@ export const generateMetadata = async ({ params }: { params: Params }) => {
   return {
     title: post.title,
     description: post.desc,
+    userId : post.userId,
   };
 };
 
 export default async function SinglePostPage({ params }: {params: Params}) {
   const { slug } = await params;
   const post = await getPost(slug);
-
+ 
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
         <Image
-          src={post.img}
+          src={post.image}
           alt={post.title || "Blog post"}
           width={250}
           height={550}
@@ -64,18 +70,19 @@ export default async function SinglePostPage({ params }: {params: Params}) {
         <div className={styles.detail}>
           {post && (
             <Suspense fallback={<div>Loading...</div>}>
-              <PostUser userID={post.userId} />
+              <PostUser userId={post.userId}  />
             </Suspense>
           )}
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
             <span className={styles.detailValue}>
-              {post.created_at.toString().slice(0, 10)}
+              {post.createdAt.toString().slice(0, 10)}
             </span>
-          </div>
+              {/* {post.createdAt.toString().slice(0, 10)} */}
         </div>
         <div className={styles.content}>{post.desc}</div>
       </div>
+    </div>
     </div>
   );
 }

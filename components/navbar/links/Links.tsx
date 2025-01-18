@@ -1,12 +1,9 @@
-// import Link from "next/link";
 "use client"
 import { useState } from "react";
 import NavLink from "./navLink/navLink";
 import styles from "./links.module.css"
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
-import {logout} from "@/actions/auth"
-import { sign } from "crypto";
 import { revalidatePath } from "next/cache";
 const links = [
     {
@@ -16,11 +13,7 @@ const links = [
     {
         title: "About",
         path: "/about"
-    },
-    {
-        title: "Contact",
-        path: "/contact"
-    },       
+    },     
     {
         title: "Blog",
         path: "/blog"
@@ -34,7 +27,7 @@ const links = [
 const  Links =  () => {
     const [open, setOpen] = useState(false)
     const { data: session } = useSession();
-
+    console.log(session);
     return (
         <div className={styles.links}>
             {links.map(link => <NavLink item={link} key={link.title} />)}

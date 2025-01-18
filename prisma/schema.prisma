@@ -17,16 +17,32 @@ model User {
   id            String          @id @default(cuid())
   name          String?
   email         String          @unique
+  hashedPassword String?
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  posts         Post[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+ 
+
+ model Post{
+  id        BigInt   @id @default(autoincrement()) @map("id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  title     String   @map("title")
+  desc      String   @map("desc")
+  image     String?  @map("img")
+  userId    String   @map("userId")
+  slug      String   @map("slug") @unique
+
+  user User @relation(fields: [userId], references: [id]) 
+ }
  
 model Account {
   userId            String

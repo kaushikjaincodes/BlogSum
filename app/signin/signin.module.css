@@ -1,0 +1,15 @@
+/* CSS for the outer <div> */
+.container {
+    width: 100%;
+    display: flex;
+    margin-top: 20px; /* Assuming `mt-20` is 20px, adjust as needed */
+    justify-content: center;
+  }
+  
+  /* CSS for the <section> */
+  .section {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+  }
+  

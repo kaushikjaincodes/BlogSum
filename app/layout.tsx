@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import {Inter} from 'next/font/google'
 import "./globals.css";
-import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/footer/Footer";
 import {auth}  from "../auth";
 import { SessionProvider } from "next-auth/react";
 
@@ -24,9 +22,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="container">
-          <Navbar/>
           {children}
-          <Footer/>
         </div>
       </body>
     </html>
