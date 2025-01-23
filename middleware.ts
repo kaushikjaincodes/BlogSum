@@ -2,7 +2,7 @@ import {auth} from "@/auth"
 import {  NextResponse } from "next/server";
 import type { NextRequest} from "next/server";
 
-const protectedRoutes = ["/api/auth/[...nextauth]","/api/blog/addpost","/api/blog/deletepost","/create","/blog"];
+const protectedRoutes = ["/api/auth/[...nextauth]","/api/blog/addpost","/api/blog/deletepost","/create"];
 
 export const config={
     matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],

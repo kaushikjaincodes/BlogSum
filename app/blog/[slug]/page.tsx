@@ -3,6 +3,9 @@ import Image from "next/image";
 import styles from "./singlePost.module.css";
 import { prisma } from "@/app/lib/db";  
 import PostUser from "@/components/postUser/postUser";
+import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/Footer";
+
 type Post = {
   id: bigint;
   title: string;
@@ -55,6 +58,8 @@ export default async function SinglePostPage({ params }: {params: Params}) {
   const post = await getPost(slug);
  
   return (
+    <>
+    <Navbar/>
     <div className={styles.container}>
       <div className={styles.imgContainer}>
         <Image
@@ -78,11 +83,12 @@ export default async function SinglePostPage({ params }: {params: Params}) {
             <span className={styles.detailValue}>
               {post.createdAt.toString().slice(0, 10)}
             </span>
-              {/* {post.createdAt.toString().slice(0, 10)} */}
         </div>
-        <div className={styles.content}>{post.desc}</div>
       </div>
+      <div className={styles.content}>{post.desc}</div>
     </div>
     </div>
+    <Footer/>
+    </>
   );
 }

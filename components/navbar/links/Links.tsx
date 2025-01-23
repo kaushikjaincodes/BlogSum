@@ -35,7 +35,7 @@ const  Links =  () => {
                 <>
                     {session?.user?.image && (
                         <Image 
-                        className="rounded-full"
+                        className={styles['rounded-full']}
                         width={30}
                         height={30}
                         alt="User Image"

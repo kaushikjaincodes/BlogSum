@@ -46,6 +46,7 @@ const BlogPage = async () => {
       </div>
       <Footer/>
       </>
+  
     );
   } catch (error) {
     console.error('Error fetching posts:', error);

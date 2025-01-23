@@ -52,4 +52,12 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         z-index: 1000;
     }
+
+}
+
+.rounded-full {
+    border-radius: 50%; 
+    vertical-align: middle;
+    margin-right: 10px;
+    display: inline-block;
 }
