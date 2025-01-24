@@ -1,8 +1,5 @@
-Here’s a detailed and well-structured `README.md` template for a project that uses **Prisma ORM**, **Google Authentication with NextAuth**, and **Next.js**:
 
----
-
-# **Project Name**
+# **Inscribe**
 
 ## **Overview**
 This project is a modern web application built using **Next.js**, featuring **Prisma ORM** for database management and **NextAuth** for user authentication with Google. It provides a scalable foundation for any full-stack application.
@@ -177,5 +174,3 @@ const getPosts = async () => {
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ---
-
-Feel free to customize this template to match your project specifics.
